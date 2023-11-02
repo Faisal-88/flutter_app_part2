@@ -13,7 +13,7 @@ class _AkesGambarState extends State<AkesGambar> {
   XFile? image;
 
   Future<void> getFromKamera() async {
-    var res = await ImagePicker().pickImage(source: ImageSource.camera); //bisa gunakan fitur "camera" atau ("galleri" <-untuk input foto)
+    var res = await ImagePicker().pickImage(source: ImageSource.gallery); //bisa gunakan fitur "camera" atau ("galleri" <-untuk input foto)
     if(res != null) {
       setState(() {
         image = res;
