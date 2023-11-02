@@ -7,7 +7,7 @@ class ModelPegawai {
   int get id => _id ?? 0;
   String get firstName => _firstName ?? "";
   String get lastName => _lastName  ?? "";
-  String get mobileno => _mobileNo ?? "";
+  String get mobileNo => _mobileNo ?? "";
   String get emailId => _emailId ?? "";
 
   Map<String, dynamic> toMap() {

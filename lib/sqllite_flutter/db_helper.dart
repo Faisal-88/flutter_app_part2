@@ -65,7 +65,7 @@ class DatabaseHelper {
     return result;
   }
 
-  Future<int?> dalatePegawai(int id) async {
+  Future<int?> deletePegawai(int id) async {
     var dbClient = await cekDatabase();
     var result =await dbClient!
       .delete(tabelPegawai, where: "$columnId = ?", whereArgs: [id]);
