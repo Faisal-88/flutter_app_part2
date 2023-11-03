@@ -11,7 +11,7 @@ class ScreenBerita extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (BuildContext context) {
-      return ProvaiderBerita.initBerita();
+      return ProvaiderBerita();
       },
    child: Scaffold(
       appBar: AppBar(
@@ -20,17 +20,17 @@ class ScreenBerita extends StatelessWidget {
           style: TextStyle(color: Colors.white),
           ),
           backgroundColor: Colors.green,
-          actions: [
-            IconButton(
-              onPressed: () {
-                Navigator.push(context,
-                 MaterialPageRoute(builder: (_) =>  const ScreenUser()));
-              },
-              icon: const Icon(Icons.person))
-          ],
+          // actions: [
+          //   IconButton(
+          //     onPressed: () {
+          //       Navigator.push(context,
+          //        MaterialPageRoute(builder: (_) =>  const ScreenUser()));
+          //     },
+          //     icon: const Icon(Icons.person))
+          // ],
       ),
       body: Consumer<ProvaiderBerita>(
-        builder: (BuildContext, value, Widget? child) {
+        builder: (BuildContext context, value, Widget? child) {
           return value.isLoading == true
           ? const Center(
             child: CircularProgressIndicator(
