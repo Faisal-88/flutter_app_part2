@@ -77,7 +77,7 @@ class _EditPegawaiState extends State<EditPegawai> {
                         .updatePegawai(ModelPegawai.fromMap({
                       "id": widget.data.id,
                       "firstname": firstName?.text,
-                      "Lastname": lastName?.text,
+                      "lastname": lastName?.text,
                       "mobileno": mobileNo?.text,
                       "emailid": emailId?.text
                     }))
