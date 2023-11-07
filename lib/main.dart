@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_week_4/UI/uiberita/screen_berita.dart';
-import 'package:flutter_week_4/akses_gambar.dart';
+// import 'package:flutter_week_4/UI/uiberita/screen_berita.dart';
+// import 'package:flutter_week_4/akses_gambar.dart';
 import 'package:flutter_week_4/sqllite_flutter/list_pegawai.dart';
 import 'package:flutter_week_4/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform
+    );
   runApp(const MyApp());
 }
 
