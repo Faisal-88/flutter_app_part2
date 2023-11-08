@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_week_4/firebase_learn/authentication.dart';
+import 'package:flutter_week_4/firebase_learn/login_signup_screen.dart';
 
 class RootPage extends StatefulWidget {
   final BaseAuth? auth;
@@ -9,7 +10,7 @@ class RootPage extends StatefulWidget {
   State<RootPage> createState() => _RootPageState();
 }
 
-  enum authStatus {Not_DETERMINED, NOT_LOGGED_IN, LOGGED_IN }
+  enum AuthStatus {Not_DETERMINED, NOT_LOGGED_IN, LOGGED_IN }
 
 class _RootPageState extends State<RootPage> {
 
@@ -52,17 +53,17 @@ void onLoggedIn() async {
       userId = user?.uid ?? "";
     });
   });
-  setState(() {
-    authStatus = AuthStatus.LOGGED_IN;
-  });
+  // setState(() {
+  //   authStatus = AuthStatus.LOGGED_IN;
+  // });
 }
 
   @override
   Widget build(BuildContext context) {
     switch (authStatus) {
-      case AuthStatus.Not_DETERMINED;
+      case AuthStatus.Not_DETERMINED:
       return buildWaittingScreen();
-      case AuthStatus.NOT_LOGGED_IN;
+      case AuthStatus.NOT_LOGGED_IN:
       return LoginSignupPage(
         auth: widget.auth, onLoggedIn: onLoggedIn, onSignOut: onSignOut);
       case AuthStatus.LOGGED_IN:
