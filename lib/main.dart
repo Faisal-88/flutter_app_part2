@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_week_4/firebase_learn/authentication.dart';
+import 'package:flutter_week_4/firebase_learn/root_page.dart';
 // import 'package:flutter_week_4/UI/uiberita/screen_berita.dart';
 // import 'package:flutter_week_4/akses_gambar.dart';
 import 'package:flutter_week_4/sqllite_flutter/list_pegawai.dart';
@@ -25,7 +27,10 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const ListPegawai());
+      home: RootPage(
+        auth: Auth(),
+      ),
+    );
   }
 }
 

@@ -66,13 +66,16 @@ void onLoggedIn() async {
       case AuthStatus.NOT_LOGGED_IN:
       return LoginSignupPage(
         auth: widget.auth, onLoggedIn: onLoggedIn, onSignOut: onSignOut);
-      case AuthStatus.LOGGED_IN:
-        if(userId.isNotEmpty && userId != null) {
-          return HomePage(
-            userId: userId, auth: widget.auth, onSignOut: onSignOut);
-        } else {
-          return buildWaittingScreen();
-        }
+      // case AuthStatus.LOGGED_IN:
+      //   if(userId.isNotEmpty && userId != null) {
+      //     return HomePage(
+      //       userId: userId, auth: widget.auth, onSignOut: onSignOut);
+      //   } else {
+      //     return buildWaittingScreen();
+        // }
+        default:
+        return buildWaittingScreen();
+
     }
   }
 }

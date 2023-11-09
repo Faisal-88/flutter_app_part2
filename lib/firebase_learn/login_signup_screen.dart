@@ -1,6 +1,8 @@
+// ignore_for_file: unnecessary_null_comparison, unnecessary_import, avoid_print, constant_identifier_names
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_week_4/firebase_learn/authentication.dart';
+import 'package:flutter_week_4/firebase_learn/home_screen.dart';
 
 class LoginSignupPage extends StatefulWidget {
   final BaseAuth? auth;
@@ -43,13 +45,13 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
           if(formMode == FormMode.LOGIN) {
             userId = await widget.auth!.signIn(email ?? "", password ?? "");
             setState((){
-              // Navigator.pushAndRemoveUntil(
-              //   context,
-              //   MaterialPageRoute(builder: (_) => HomePage()),
-              //   (route) => false);
-              //   if(kDebugMode) {
-              //     print("user sign $userId");
-              //   }
+              Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(builder: (_) => const HomePage()),
+                (route) => false);
+                if(kDebugMode) {
+                  print("user sign $userId");
+                }
             });
           }else {
             userId = await widget.auth!.signUp(email ?? "", password ?? "");
@@ -110,7 +112,6 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
     });
   }
 
-  @override
   void iniState() {
     // TODO: implement iniState
     super.initState();
@@ -132,7 +133,7 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
                   padding: const EdgeInsets.fromLTRB(8, 7, 0, 0),
                   child: CircleAvatar(
                     radius: 48,
-                    child: Image.network(""),
+                    child: Image.network("https://img-b.udemycdn.com/user/200_H/67132062_59c2.jpg"),
                   ),
                   ),
                   TextFormField(
@@ -156,7 +157,7 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
                 padding: const EdgeInsets.fromLTRB(0, 15, 0, 0),
                 child: TextFormField(
                   validator: (val) {
-                    return val!.isEmpty ? "Password can\'t be Empty" : null;
+                    return val!.isEmpty ? "Password can/'t be Empty" : null;
                   },
                   maxLines: 1,
                   obscureText: true,
@@ -171,7 +172,50 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
                       color: Colors.green,
                     )),
                   ),
-                )
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 45, 0, 0),
+               child: MaterialButton(
+                  elevation: 5,
+                  color: Colors.green,
+                  minWidth: 200,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30),
+                ),
+                height: 45,
+                onPressed: () {
+                  validateAndSubmit();
+                },
+                child: formMode == FormMode.LOGIN
+                    ? const Text(
+                      "Login",
+                      style: TextStyle(color: Colors.white, fontSize: 20),
+                    )
+                    : const Text(
+                      "Sign Up",
+                      style: TextStyle(color: Colors.white, fontSize: 20),
+                    )
+                 ),
+                ),
+                 TextButton(
+                  onPressed: () {
+                    if (formMode == FormMode.LOGIN) {
+                      chengeFormSignUp();
+                    }else {
+                      chengeFormLogin();
+                    }
+                  },
+                  child: formMode == FormMode.LOGIN
+                    ? const Text(
+                      "Create an Account",
+                      style: TextStyle(
+                        fontSize: 10, fontWeight: FontWeight.bold),
+                    )
+                    : const Text(
+                      "Have an account? Plase Sign in",
+                      style: TextStyle(
+                        fontSize: 18, fontWeight: FontWeight.bold),
+                    )),
               ],
             ),
           ),
