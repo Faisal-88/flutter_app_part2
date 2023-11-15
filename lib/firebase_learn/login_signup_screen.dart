@@ -65,7 +65,7 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
             if (userId!.isNotEmpty &&
             userId != null &&
             formMode == FormMode.LOGIN) {
-              widget.onLoggedIn;
+              widget.onLoggedIn?.call();
               setState(() {});
             }
           }

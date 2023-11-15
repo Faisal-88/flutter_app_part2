@@ -1,17 +1,22 @@
 import 'dart:async';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_week_4/firebase_learn/add_food_firebase.dart';
 import 'package:flutter_week_4/firebase_learn/authentication.dart';
+// import 'package:flutter_week_4/firebase_learn/login_signup_screen.dart';
 import 'package:flutter_week_4/firebase_learn/res_food.dart';
+import 'package:flutter_week_4/firebase_learn/root_page.dart';
 
 class HomePage extends StatefulWidget {
   final String? userId;
   final BaseAuth? auth;
   final VoidCallback? onSignOut;
-  const HomePage({super.key, this.userId, this.auth, this.onSignOut});
+  // const HomePage({super.key, this.userId, this.auth, this.onSignOut});
+  const HomePage({Key? key, this.userId, this.auth, this.onSignOut}) : super(key: key);
+
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -48,16 +53,58 @@ class _HomePageState extends State<HomePage> {
     super.dispose();
     onAddList?.cancel();
   }
+void _signOut() async {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: const Text("Konfirmasi"),
+        content: const Text("Apakah Anda yakin ingin keluar?"),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: const Text("Batal"),
+          ),
+          TextButton(
+            onPressed: () {
+              FirebaseAuth.instance.signOut();
+              // try {
+              //   await widget.auth?.signOut();
+              //   widget.onSignOut?.call();
+                  Navigator.pushAndRemoveUntil(context,
+                       MaterialPageRoute(builder: (_) => RootPage(auth: Auth(),)), 
+                       (route) => false);
+              // } catch (e) {
+              //   print(e);
+              // }
+            },
+            child: const Text("Ya"),
+          ),
+        ],
+      );
+    },
+  );
+}
 
-  @override
+ @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          "Food App",
-          style: TextStyle(color: Colors.white)
-          ),
+          "Aplikasi Makanan",
+          style: TextStyle(color: Colors.white),
+        ),
         backgroundColor: Colors.green,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.exit_to_app),
+            onPressed: () {
+              _signOut();
+            },
+          ),
+        ],
       ),
       body: listFood.isEmpty
             ? const Center(
@@ -86,4 +133,5 @@ class _HomePageState extends State<HomePage> {
         ),
     );
   }
+
 }
