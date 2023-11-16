@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_null_comparison
+
 import 'package:flutter/material.dart';
 import 'package:flutter_week_4/firebase_learn/authentication.dart';
 import 'package:flutter_week_4/firebase_learn/home_screen.dart';
