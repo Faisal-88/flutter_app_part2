@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_week_4/firebase_learn/authentication.dart';
+import 'package:flutter_week_4/firebase_learn/home_screen.dart';
 import 'package:flutter_week_4/firebase_learn/login_signup_screen.dart';
 
 class RootPage extends StatefulWidget {
@@ -66,15 +67,15 @@ void onLoggedIn() async {
       case AuthStatus.NOT_LOGGED_IN:
       return LoginSignupPage(
         auth: widget.auth, onLoggedIn: onLoggedIn, onSignOut: onSignOut);
-      // case AuthStatus.LOGGED_IN:
-      //   if(userId.isNotEmpty && userId != null) {
-      //     return HomePage(
-      //       userId: userId, auth: widget.auth, onSignOut: onSignOut);
-      //   } else {
-      //     return buildWaittingScreen();
-        // }
-        default:
-        return buildWaittingScreen();
+      case AuthStatus.LOGGED_IN:
+        if(userId.isNotEmpty && userId != null) {
+          return HomePage
+          (
+            userId: userId, auth: widget.auth, onSignOut: onSignOut);
+        } else {
+          return buildWaittingScreen();
+        }
+        // return buildWaittingScreen();
 
     }
   }

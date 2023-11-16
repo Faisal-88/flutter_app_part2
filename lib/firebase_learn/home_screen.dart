@@ -39,11 +39,18 @@ class _HomePageState extends State<HomePage> {
       listFood.add(ResFood.fromSnapshoot(event.snapshot));
     });
   }
+  Future<void> deleteFood(String key, int index) async {
+    await databaseReference?.child("kuliner").child(key).remove();
+    setState(() {
+      listFood.removeAt(index);
+    });
+  }
 
   @override
   void initState() {
     // TODO: implement iniState
     super.initState();
+    databaseReference = FirebaseDatabase.instance.ref();
     getData();
   }
 
@@ -115,6 +122,9 @@ void _signOut() async {
             itemBuilder: (context, index) {
               ResFood data = listFood[index];
               return ListTile(
+                onLongPress: () async {
+                  await deleteFood(data.key ?? "", index);
+                },
                 title: Text("${data.namaMakanan}"),
               );
             }),

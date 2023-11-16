@@ -28,14 +28,15 @@ class _addFoodFirebaseState extends State<addFoodFirebase> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: const Center(
-        child: Text("Add Food")),
+      title: Center(
+        child: Text("Add Food ${widget.userId}")),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             TextFormField(
+              controller: nama,
               decoration: const InputDecoration(
                 hintText: "Nama Makanan"
               ),
@@ -44,6 +45,7 @@ class _addFoodFirebaseState extends State<addFoodFirebase> {
               height: 8,
             ),
             TextFormField(
+              controller: asal,
               decoration: const InputDecoration(
                 hintText: "Asal Makanan"
               ),
@@ -52,6 +54,7 @@ class _addFoodFirebaseState extends State<addFoodFirebase> {
               height: 8,
             ),
             TextFormField(
+              controller: lat,
               decoration: const InputDecoration(
                 hintText: "Latitude"
               ),
@@ -86,9 +89,10 @@ class _addFoodFirebaseState extends State<addFoodFirebase> {
                     );
                   } else {
                     await addKuliner().then((value) {
-                      Navigator.pushAndRemoveUntil(context,
-                       MaterialPageRoute(builder: (_) => const HomePage()), 
-                       (route) => false);
+                      // Navigator.pushAndRemoveUntil(context,
+                      //  MaterialPageRoute(builder: (_) => const HomePage()), 
+                      //  (route) => false);
+                      Navigator.pop(context);
                     });
                   }
                 },
